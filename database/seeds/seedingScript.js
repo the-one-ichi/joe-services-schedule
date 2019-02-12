@@ -43,11 +43,10 @@ let generateRandomNumber = function (num) {
 }
 
 // start end so the database doesnt have to generate the id.
- let generateDataFunc = function (numberOfRecords) {
+let generateDataFunc = function (numberOfRecords) {
   let results = [];
   for (let i = 0; i < numberOfRecords; i++) {
     let record = {
-      // id: i,
       vs: " vs ",
       city: faker.address.city(),
       team: generateTeamFunc(generateRandomNumber(32)),
@@ -69,12 +68,14 @@ let generateRandomNumber = function (num) {
     }
     results.push(record);
   }
-  console.log('Batch ', numberOfRecords,  'inserted at: ', new Date());
+  // console.log('Batch ', numberOfRecords,  'created at: ', new Date());
   return results;
 }
 
 
+
 exports.seed = knex => knex('schedule').del()
+            .then(() => console.log('starting' + new Date()))
             .then(() => knex.batchInsert('schedule', generateDataFunc(500000), 1000)
               .then(() => knex.batchInsert('schedule', generateDataFunc(500000), 1000))
               .then(() => knex.batchInsert('schedule', generateDataFunc(500000), 1000))
@@ -94,55 +95,4 @@ exports.seed = knex => knex('schedule').del()
               .then(() => knex.batchInsert('schedule', generateDataFunc(500000), 1000))
               .then(() => knex.batchInsert('schedule', generateDataFunc(500000), 1000))
               .then(() => knex.batchInsert('schedule', generateDataFunc(500000), 1000))
-              .then(() => knex.batchInsert('schedule', generateDataFunc(500000), 1000))
-              .then(() => knex.batchInsert('schedule', generateDataFunc(500000), 1000)));
-
-
-
-// exports.seed = function (knex) {
-//   return knex('schedule').del()
-//   .then(function () {
-//     return knex.batchInsert('schedule', generateDataFunc(500000), 1000)
-//     .then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     }).then(function () {
-//       return knex.batchInsert('schedule', generateDataFunc(500000), 1000);
-//     });
-//   });
-// };
+              .then(() => console.log('starting' + new Date())));

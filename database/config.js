@@ -1,8 +1,3 @@
-// let environment = process.env.NODE_ENV || 'development';
-// let config = require('../knexfile.js')[environment];
-// module.exports = require('knex')(config);
-
-
 var knex = require('knex')({
   client: 'pg',
   connection: {
@@ -22,9 +17,8 @@ bookshelf.knex.schema.hasTable('schedule').then(function(exists) {
       console.log('Table Dropped')
     })
   }
-  // if(!exists) {
     bookshelf.knex.schema.createTable(('schedule') , function (table) {
-      table.integer('id');
+      table.increments('id');
       table.string('vs').notNullable();
       table.string('city').notNullable();
       table.string('team').notNullable();
@@ -46,7 +40,6 @@ bookshelf.knex.schema.hasTable('schedule').then(function(exists) {
     }).then(function(table) {
       console.log('Table Created: ', table)
     })
-  // }
 })
 
 module.exports = bookshelf;
