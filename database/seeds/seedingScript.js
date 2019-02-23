@@ -72,8 +72,6 @@ let generateDataFunc = function (numberOfRecords) {
   return results;
 }
 
-
-
 exports.seed = knex => knex('schedule').del()
             .then(() => console.log('starting' + new Date()))
             .then(() => knex.batchInsert('schedule', generateDataFunc(500000), 1000)
